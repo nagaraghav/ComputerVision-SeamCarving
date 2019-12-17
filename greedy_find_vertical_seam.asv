@@ -1,0 +1,42 @@
+
+
+function verticalSeam = greedy_find_vertical_seam(energyImg)
+   [m,n] = size(energyImg);
+   
+   vert = zeros(1,m);
+     
+   
+   vert(1) = min(energyImg(1,:));
+   
+   [~, minColofLastRow] = min(energyImg(1,:));
+   
+   for i=2:1:m
+       
+       if(minColofLastRow == 1)
+           
+            [value, pos] = min([energyImg(i,minColofLastRow) ,energyImg(i,minColofLastRow+1)]);
+       vert(i) = value;
+       minColofLastRow = pos;
+           
+       elseif(minColofLastRow == n)
+          [value, pos] = min([energyImg(i,minColofLastRow),energyImg(i,minColofLastRow -1)]);
+       vert(i) = value;
+       minColofLastRow = pos;
+       else   
+           
+       [value, pos] = min([energyImg(i,minColofLastRow),energyImg(i,minColofLastRow -1) ,energyImg(i,minColofLastRow+1)]);
+       vert(i) = value;
+       if pos == 1
+           minColofLastRow = minColOfLastRow;
+       end
+       if pos == 2
+           minColofLastRow = minColOfLastRow - 1;
+       end
+       if pos == 3
+       end
+       
+   end
+   
+   verticalSeam = vert;
+    disp(vert);
+end
